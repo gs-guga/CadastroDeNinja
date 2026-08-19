@@ -1,0 +1,12 @@
+2026-08-19 08:29:22.409197-03:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "[*]RANCK REMOVE TABLE"; expected "ROLLBACK, REVOKE, RUNSCRIPT, RELEASE, REFRESH"; SQL statement:
+RANCK REMOVE TABLE [42001-240]
+2026-08-19 08:30:10.304487-03:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "RANCK" not found; SQL statement:
+DROP TABLE RANCK [42102-240]
+2026-08-19 08:30:14.378897-03:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "RANCK" not found; SQL statement:
+DROP TABLE RANCK [42102-240]
+2026-08-19 08:30:34.547006-03:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "RANCK" not found; SQL statement:
+DROP TABLE RANCK [42102-240]

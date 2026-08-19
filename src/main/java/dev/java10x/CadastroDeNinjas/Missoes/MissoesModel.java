@@ -22,7 +22,7 @@ public class MissoesModel {
 
     private String nome;
 
-    private String ranck;
+    private String rank;
 
     @OneToMany(mappedBy = "missoes")
     private List<NinjaModel> ninjas;
