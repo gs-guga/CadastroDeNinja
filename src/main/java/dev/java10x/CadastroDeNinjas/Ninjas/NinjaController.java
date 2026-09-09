@@ -12,7 +12,7 @@ public class NinjaController {
     }
 
     // adicionar ninja (CREATE)
-    @PostMapping("/adicionarNinja")
+    @PostMapping("/criar")
     public String adicionarNinja() {
         return "Adicionando Ninja";
     }
