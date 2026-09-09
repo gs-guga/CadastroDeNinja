@@ -10,3 +10,6 @@ DROP TABLE RANCK [42102-240]
 2026-08-19 08:30:34.547006-03:00 jdbc[13]: exception
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "RANCK" not found; SQL statement:
 DROP TABLE RANCK [42102-240]
+2026-09-09 08:33:26.801680-03:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "TB_MISSOES y[*]"""; SQL statement:
+TB_MISSOES y" [42000-240]
