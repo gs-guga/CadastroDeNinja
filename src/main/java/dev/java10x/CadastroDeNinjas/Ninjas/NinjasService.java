@@ -24,5 +24,13 @@ public class NinjasService {
         Optional<NinjaModel> ninjaModel = ninjaRepository.findById(id);
         return ninjaModel.orElse(null);
     }
+
+    //criar um ninja na tabela
+    public NinjaModel criarNinja(NinjaModel ninjaModel) {
+        return ninjaRepository.save(ninjaModel);
+    }
+
+    //altera um ninja na tabela
+    //deleta um ninja na tabela
 }
 
