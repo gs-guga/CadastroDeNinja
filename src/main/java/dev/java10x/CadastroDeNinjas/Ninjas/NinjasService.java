@@ -32,5 +32,8 @@ public class NinjasService {
 
     //altera um ninja na tabela
     //deleta um ninja na tabela
+    public void deletarNinja(Long id) {
+        ninjaRepository.deleteById(id);
+    }
 }
 
