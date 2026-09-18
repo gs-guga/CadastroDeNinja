@@ -1,8 +1,5 @@
 package dev.java10x.CadastroDeNinjas.Ninjas;
 
-<<<<<<< Updated upstream
-public class NinjaDTO {
-=======
 import dev.java10x.CadastroDeNinjas.Missoes.MissoesModel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -19,5 +16,5 @@ public class NinjaDTO {
         private int idade;
         private String rank;
         private MissoesModel missoes;
->>>>>>> Stashed changes
+
 }
