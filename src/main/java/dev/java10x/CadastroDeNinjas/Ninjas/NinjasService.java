@@ -50,10 +50,8 @@ public class NinjasService {
         }return  null;
     }
 
-
     //deleta um ninja na tabela
     public void deletarNinja(Long id) {
         ninjaRepository.deleteById(id);
     }
 }
-
