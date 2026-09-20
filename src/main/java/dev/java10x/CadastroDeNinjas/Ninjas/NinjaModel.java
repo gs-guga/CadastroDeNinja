@@ -31,6 +31,7 @@ public class NinjaModel {
     @Column(name = "rank")
     private String rank;
 
+
     @ManyToOne
     @JoinColumn(name = "missoes_id")
     private MissoesModel missoes;
