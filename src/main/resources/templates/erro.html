@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Erro</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 30px; background-color: #f4f4f9; text-align: center; }
+        .box-erro { background: white; padding: 30px; display: inline-block; border-radius: 8px; border-top: 5px solid #e74c3c; }
+        h1 { color: #e74c3c; }
+    </style>
+</head>
+<body>
+
+<div class="box-erro">
+    <h1>Ops! Ocorreu um erro</h1>
+    <p th:text="${mensagemErro}">Mensagem de erro genérica.</p>
+    <a th:href="@{/ninjas/ui/listar}">Voltar para a lista</a>
+</div>
+
+</body>
+</html>
