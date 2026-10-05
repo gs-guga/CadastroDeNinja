@@ -1,4 +1,4 @@
-package dev.java10x.CadastroDeNinjas.NInjasTests;
+package dev.java10x.CadastroDeNinjas.Tests;
 
 
 import dev.java10x.CadastroDeNinjas.Missoes.*;
