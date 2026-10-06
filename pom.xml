@@ -19,10 +19,16 @@
 	</properties>
 
 	<dependencies>
-		<!-- Spring Boot 4: O starter web agora se chama webmvc -->
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-webmvc</artifactId>
+		</dependency>
+
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-validation</artifactId>
 		</dependency>
 
 		<!-- Spring Data JPA -->
@@ -37,7 +43,6 @@
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
 		</dependency>
 
-		<!-- Spring Boot 4: Flyway agora tem um starter oficial -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-flyway</artifactId>
@@ -82,7 +87,7 @@
 			<scope>test</scope>
 		</dependency>
 
-		<!-- ESSA é a dependência que faz o @AutoConfigureMockMvc funcionar no Spring Boot 4 -->
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-webmvc-test</artifactId>

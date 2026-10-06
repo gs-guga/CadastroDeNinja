@@ -12,11 +12,11 @@ jobs:
 
     services:
       postgres:
-        image: postgres:15
+        image: postgres:16
         env:
           POSTGRES_DB: cadastro_ninjas
           POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: postgrespassword
+          POSTGRES_PASSWORD: postgres
         ports:
           - 5432:5432
         options: >-
@@ -38,7 +38,7 @@ jobs:
 
       - name: Executar testes com Maven
         env:
-          SPRING_DATASOURCE_URL: jdbc:postgresql://localhost:5432/cadastro_ninjas
-          SPRING_DATASOURCE_USERNAME: postgres
-          SPRING_DATASOURCE_PASSWORD: postgrespassword
+          DB_URL: jdbc:postgresql://localhost:5432/cadastro_ninjas
+          DB_USERNAME: postgres
+          DB_PASSWORD: postgres
         run: mvn clean test
