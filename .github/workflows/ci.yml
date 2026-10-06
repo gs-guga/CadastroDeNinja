@@ -10,6 +10,7 @@ jobs:
   build-and-test:
     runs-on: ubuntu-latest
 
+
     services:
       postgres:
         image: postgres:16
@@ -36,9 +37,12 @@ jobs:
           distribution: 'temurin'
           cache: maven
 
+
+      - name: Criar arquivo .env
+        run: |
+          echo "DB_URL=jdbc:postgresql://localhost:5432/cadastro_ninjas" > .env
+          echo "DB_USERNAME=postgres" >> .env
+          echo "DB_PASSWORD=postgres" >> .env
+
       - name: Executar testes com Maven
-        env:
-          DB_URL: jdbc:postgresql://localhost:5432/cadastro_ninjas
-          DB_USERNAME: postgres
-          DB_PASSWORD: postgres
         run: mvn clean test
