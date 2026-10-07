@@ -93,4 +93,4 @@ jobs:
             # Iniciar a nova versão do JAR em segundo plano na porta 8080
             cd /home/ubuntu/app
             nohup java -jar app.jar > app.log 2>&1 &
-            echo "Aplicação inicializada com sucesso!"            sudo systemctl is-active ninjas
+            echo "Aplicação inicializada com sucesso!"
