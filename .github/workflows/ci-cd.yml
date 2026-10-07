@@ -70,27 +70,26 @@ jobs:
           target: "/home/ubuntu/app"
           strip_components: 1
 
-      - name: Reiniciar a aplicação
-        uses: appleboy/ssh-action@v0.1.10
-        with:
-          host: ${{ secrets.EC2_HOST }}
-          username: ubuntu
-          key: ${{ secrets.EC2_SSH_KEY }}
-          script: |
-            # Instalar o Java 21 se ainda não estiver instalado
-            if ! command -v java &> /dev/null; then
-              sudo apt-get update
-              sudo apt-get install -y openjdk-21-jre-headless
-            fi
+      - - name: Reiniciar a aplicação
+      - uses: appleboy/ssh-action@v0.1.10
+      - with:
+      - host: ${{ secrets.EC2_HOST }}
+      - username: ubuntu
+      - key: ${{ secrets.EC2_SSH_KEY }}
+      - script: |
 
-            # Encerrar o processo anterior da aplicação caso esteja rodando
-            PID=$(pgrep -f 'app.jar' || true)
-            if [ -n "$PID" ]; then
-              echo "Encerrando processo antigo (PID: $PID)..."
-              kill -9 $PID
-            fi
+      - if ! command -v java &> /dev/null; then
+      - sudo apt-get update
+      - sudo apt-get install -y openjdk-21-jre-headless
+      - fi
 
-            # Iniciar a nova versão do JAR em segundo plano na porta 8080
-            cd /home/ubuntu/app
-            nohup java -jar app.jar > app.log 2>&1 &
-            echo "Aplicação inicializada com sucesso!"
+
+      - pkill -9 -f 'app.jar' || true
+      - sleep 2
+
+
+      - mkdir -p /home/ubuntu/app
+      - cd /home/ubuntu/app
+      - nohup java -jar app.jar > app.log 2>&1 &
+      - sleep 3
+      - echo "Aplicação iniciada no EC2 com sucesso!"
