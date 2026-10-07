@@ -70,26 +70,29 @@ jobs:
           target: "/home/ubuntu/app"
           strip_components: 1
 
-      - - name: Reiniciar a aplicação
-      - uses: appleboy/ssh-action@v0.1.10
-      - with:
-      - host: ${{ secrets.EC2_HOST }}
-      - username: ubuntu
-      - key: ${{ secrets.EC2_SSH_KEY }}
-      - script: |
+      - name: Reiniciar a aplicação
+        uses: appleboy/ssh-action@v0.1.10
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ubuntu
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            if ! command -v java &> /dev/null; then
+              sudo apt-get update
+              sudo apt-get install -y openjdk-21-jre-headless
+            fi
 
-      - if ! command -v java &> /dev/null; then
-      - sudo apt-get update
-      - sudo apt-get install -y openjdk-21-jre-headless
-      - fi
+            pkill -9 -f 'app.jar' || true
+            sleep 2
 
-
-      - pkill -9 -f 'app.jar' || true
-      - sleep 2
-
-
-      - mkdir -p /home/ubuntu/app
-      - cd /home/ubuntu/app
-      - nohup java -jar app.jar > app.log 2>&1 &
-      - sleep 3
-      - echo "Aplicação iniciada no EC2 com sucesso!"
+            mkdir -p /home/ubuntu/app
+            cd /home/ubuntu/app
+            
+            # Subindo a API injetando as credenciais do banco da EC2
+            nohup java -Dspring.datasource.url=jdbc:postgresql://localhost:5432/cadastro_ninjas \
+                       -Dspring.datasource.username=postgres \
+                       -Dspring.datasource.password=93366162 \
+                       -jar app.jar > app.log 2>&1 &
+            
+            sleep 3
+            echo "Aplicação iniciada no EC2 com sucesso!"
