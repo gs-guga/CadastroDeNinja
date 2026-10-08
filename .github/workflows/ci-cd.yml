@@ -72,29 +72,43 @@ jobs:
 
       - name: Reiniciar a aplicação
         uses: appleboy/ssh-action@v0.1.10
+        env:
+          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ubuntu
           key: ${{ secrets.EC2_SSH_KEY }}
+          envs: DB_PASSWORD
           script: |
             if ! command -v java &> /dev/null; then
               sudo apt-get update -y
               sudo apt-get install -y openjdk-21-jre-headless
             fi
 
-            pkill -9 -f 'app.jar' || true
-            sleep 2
+            # Para a versão anterior (o [a] evita casar com este próprio script)
+            pkill -f '[a]pp\.jar' || true
+            sleep 3
+            pkill -9 -f '[a]pp\.jar' || true
 
             mkdir -p /home/ubuntu/app
             cd /home/ubuntu/app
-            
-            # Subindo a API com limites de memoria JVM (evita erro 137) e credenciais do banco
-            nohup java -Xms128m -Xmx256m \
-                       -Dspring.datasource.url=jdbc:postgresql://localhost:5432/cadastro_ninjas \
-                       -Dspring.datasource.username=postgres \
-                       -Dspring.datasource.password=93366162 \
-                       -jar app.jar > app.log 2>&1 </dev/null &
-            
+
+            export SPRING_DATASOURCE_URL=jdbc:postgresql://localhost:5432/cadastro_ninjas
+            export SPRING_DATASOURCE_USERNAME=postgres
+            export SPRING_DATASOURCE_PASSWORD="$DB_PASSWORD"
+
+            nohup java -Xms128m -Xmx256m -jar app.jar > app.log 2>&1 </dev/null &
             disown
-            sleep 3
-            echo "Aplicação iniciada no EC2 com sucesso!"
+
+            # Espera a API responder (até ~60s)
+            for i in $(seq 1 30); do
+              if curl -fs http://localhost:8080/ninjas/boasVindas > /dev/null; then
+                echo "Aplicação iniciada no EC2 com sucesso!"
+                exit 0
+              fi
+              sleep 2
+            done
+
+            echo "A aplicação não respondeu. Últimas linhas do log:"
+            tail -50 app.log
+            exit 1
